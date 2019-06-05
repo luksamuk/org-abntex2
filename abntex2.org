@@ -1,0 +1,93 @@
+#   abntex2.org
+#   Parte do projeto org-abntex2.
+#   Copyright (c) 2019 Lucas Vieira.
+#   Este arquivo é provido sob a licença BSD 2-Clause (simplificada).
+#   Leia o arquivo LICENSE para mais informações.
+
+# Opções globais do Org-Mode
+#+OPTIONS: toc:nil title:nil
+#+LANGUAGE: bt-br
+
+
+
+# Dados para o pacote Hyperref.
+# Substitui o template do Emacs durante a exportação.
+# Abaixo, a versão em verbatim, "não-bagunçada".
+#+BIND: org-latex-hyperref-template "\\definecolor{blue}{RGB}{41,5,195}\n\\makeatletter\n\\hypersetup{\n    pdftitle={%t},\n    pdfauthor={%a},\n    pdfkeywords={%k},\n    pdfsubject={%d},\n    pdfcreator={%c},\n    colorlinks=true,\n    linkcolor=black,\n    citecolor=black,\n    filecolor=black,\n    urlcolor=black,\n    bookmarksdepth=4\n}\n\\makeatother"
+# "\definecolor{blue}{RGB}{41,5,195}
+# \makeatletter
+# \hypersetup{
+#     pdftitle={%t},
+#     pdfauthor={%a},
+#     pdfkeywords={%k},
+#     pdfsubject={%d},
+#     pdfcreator={%c},
+#     colorlinks=true,
+#     linkcolor=black,
+#     citecolor=black,
+#     filecolor=black,
+#     urlcolor=black,
+#     bookmarksdepth=4
+# }
+# \makeatother"
+
+
+
+#    Opções globais para LaTeX   #
+#+LATEX_CLASS: abntex2
+#+LATEX_CLASS_OPTIONS: [article,12pt,openany,oneside,a4paper,chapter=TITLE,hyphen,english,brazil,chapter=TITLE,sumario=tradicional]
+
+#           Pacotes              #
+#+LATEX_HEADER: \usepackage{times}
+#+LATEX_HEADER: \usepackage[utf8]{inputenc}
+#+LATEX_HEADER: \usepackage[T1]{fontenc}
+#+LATEX_HEADER: \usepackage{color}
+#+LATEX_HEADER: \usepackage{microtype}
+#+LATEX_HEADER: \usepackage{titlesec}
+#+LATEX_HEADER: \usepackage[brazilian, hyperpageref]{backref}
+#+LATEX_HEADER: \usepackage{hyperref}
+#+LATEX_HEADER: \usepackage[alf,abnt-emphasize=bf,abnt-doi=link]{abntex2cite}
+#+LATEX_HEADER: \usepackage{indentfirst}
+#+LATEX_HEADER: \usepackage{listings}
+#+LATEX_HEADER: \usepackage{graphicx}
+# #+LATEX_HEADER: \usepackage{fourier}
+#+LATEX_HEADER: \usepackage{lipsum}
+#+LATEX_HEADER: \usepackage{amssymb}
+#+LATEX_HEADER: \usepackage{amsmath}
+
+
+
+# Configurações de Fontes #
+
+# Fontes monoespaçadas e bonitas para código
+#+LATEX_HEADER: \lstset{basicstyle=\ttfamily\small,breaklines=true}
+
+# Responsável pela utilização de Times New Roman, com o tamanho normal
+# do texto, nas seções e subseções. Seções ainda têm seus nomes
+# mostrados em uppercase.
+#+LATEX_HEADER: \titleformat{\section}{\normalfont\normalsize\bfseries\uppercase}{}{0pt}{}
+#+LATEX_HEADER: \titleformat{\subsection}{\normalfont\normalsize\bfseries}{}{0pt}{\space}
+#+LATEX_HEADER: \titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{}{0pt}{\space}
+#+LATEX_HEADER: \titleformat{\paragraph}{\normalfont\normalsize\itshape}{}{0pt}{\theparagraph\space}
+
+
+
+# Outros dados do texto #
+
+# Espaçamento
+#+LATEX_HEADER: \setlength{\parindent}{1.5cm}
+#+LATEX_HEADER: \setlrmarginsandblock{3cm}{2cm}{*}
+#+LATEX_HEADER: \setulmarginsandblock{2.5cm}{2.5cm}{*}
+#+LATEX_HEADER: \checkandfixthelayout
+
+# Citações
+#+LATEX_HEADER: \renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+#+LATEX_HEADER: \renewcommand{\backref}{}
+#+LATEX_HEADER: \renewcommand*{\backrefalt}[4]{}
+
+
+
+# Elementos de preâmbulo #
+
+# Índice
+#+LATEX_HEADER: \makeindex

@@ -1,0 +1,304 @@
+#   main.org
+#   Parte do projeto org-abntex2.
+#   Copyright (c) 2019 Lucas Vieira.
+#   Este arquivo é provido sob a licença BSD 2-Clause (simplificada).
+#   Leia o arquivo LICENSE para mais informações.
+
+
+
+#+TITLE:   Exportando Org Mode para \LaTeX{} com \abnTeX
+#+AUTHOR:  Lucas Vieira
+#+EMAIL:   lucasvieira@protonmail.com
+#+DATE:    2019
+#+STARTUP: latexpreview
+
+# Inclua estes arquivos. Lembre-se de olhar o conteúdo deles.
+#+INCLUDE: abntex2.org             :only-contents t
+#+INCLUDE: abntex2-meta.org        :only-contents t
+#+INCLUDE: abntex2-pretextual.org  :only-contents t
+
+* Introdução
+
+Este projeto visa demonstrar a utilização da classe \abnTeX, em
+conjunto com o =org-mode= do Emacs.
+
+Org é um formato de documento de texto-plano para organização e
+escrita de documentos. Este formato de arquivo é extensível e feito
+para utilização em conjunto com o editor de textos Emacs. Ademais,
+este formato possibilita a exportação para diversos formatos, como
+HTML, PDF (via \LaTeX), Markdown, ASCII, e outros formatos através de
+extensões. Também é possível utilizar o formato Org para calendário,
+compromissos, listas de afazeres, /slides/, dentre outras coisas
+interessantes.
+
+* Algumas features
+
+A próxima seção mostrará alguns recursos do \abnTeX{} que podem ser
+facilitados com o uso do Org Mode.
+
+** Equações
+
+É possível inserir equações /inline/ em Org, como colocaria-se em
+\LaTeX, utilizando esta mesma linguagem. Com auxílio da extensão
+=AUCTeX=, o Emacs poderá, inclusive, renderizar fórmulas no próprio
+buffer, como uma representação no formato de imagem[fn:1].
+
+Como exemplo, temos a Equação [[eq:factorial]], representando uma função $f$
+que calcula o fatorial de um número $n$:
+
+#+NAME: eq:factorial
+\begin{equation}
+f(n) = \begin{cases}
+        1 &\text{se $n = 1$}\\
+        n \cdot f(n - 1) &\text{caso contrário}
+       \end{cases}
+\end{equation}
+
+** Citações
+
+Também é possível realizar citações com facilidade. Para tanto, você
+precisará da extensão =org-ref= configurada:
+
+#+begin_citacao
+Among all disciplines mixing Art and Science, programming holds a
+special place, and at the risk of going against a general trend of the
+time [6], Knuth was not the only one to think that the artistic aspect
+of programming is not only desirable, but also essential. Two other
+notable advocates of the “art of programming” are Dijkstra, who tried
+to demonstrate that Art in programming, far from being a luxury,
+usually pays off [29], and Ershov, who went as far as claiming that
+there is an inherent system of values in programming that relates more
+to Art than to Science [34]. But perhaps the most striking point in
+Knuth, Dijkstra, and Ershov’s arguments is that the artistic aspect of
+programming deals with such notions as elegance, aesthetics, beauty,
+style, pleasure, and emotion {2,3,4}. cite:verna2018
+#+end_citacao
+
+** Imagens
+
+Também podemos utilizar recursos extras de imagens. O exemplo abaixo
+foi gerado a partir de código feito para a ferramenta GraphViz. Veja
+que o código é compilado durante a exportação, gerando a figura
+=fib_quad.png=; esta, porém, é anexada ao documento logo em seguida, de
+forma independente, para que gere a Figura [[fig:fib-expand]].
+
+#+begin_src dot :file fib_quad.png :cmdline -Kdot -Tpng :exports none
+graph {
+      node[shape=plaintext];
+
+      fib4_1[label="fib 4"];
+      fib3_1[label="fib 3"];
+      fib3_2[label="fib 3"];
+      fib2_1[label="fib 2"];
+      fib2_2[label="fib 2"];
+      fib2_3[label="fib 2"];
+
+      fib1_1[label="fib 1"];
+      fib1_2[label="fib 1"];
+      fib1_3[label="fib 1"];
+      fib1_4[label="fib 1"];
+      fib1_5[label="fib 1"];
+
+      n1_1[label="1"];
+      n1_2[label="1"];
+      n1_3[label="1"];
+      n1_4[label="1"];
+      n1_5[label="1"];
+
+      fib0_1[label="fib 0"];
+      fib0_2[label="fib 0"];
+      fib0_3[label="fib 0"];
+
+      n0_1[label="0"];
+      n0_2[label="0"];
+      n0_3[label="0"];
+
+      "fib 5" -- { fib4_1 fib3_1 };
+
+      fib4_1  -- { fib3_2 fib2_1 };
+      fib3_1  -- { fib2_2 fib1_1 };
+      
+      fib3_2  -- { fib2_3 fib1_2 };
+      fib2_1  -- { fib1_3 fib0_1 };
+
+      fib2_2  -- { fib1_4 fib0_2 };
+      
+      fib2_3  -- { fib1_5 fib0_3 };
+
+      fib1_1 -- n1_1;
+      fib1_2 -- n1_2;
+      fib1_3 -- n1_3;
+      fib1_4 -- n1_4;
+      fib1_5 -- n1_5;
+
+      fib0_1 -- n0_1;
+      fib0_2 -- n0_2;
+      fib0_3 -- n0_3;
+}
+#+end_src
+
+#+RESULTS:
+[[file:fib_quad.png]]
+
+
+#+CAPTION: Expansão da implementação de uma função para calcular o sexto número da sequência de Fibonacci, com recursão em árvore.
+#+NAME: fig:fib-expand
+[[file:fib_quad.png]]
+
+** Tabelas
+
+Tabelas são problemáticas até mesmo em \LaTeX{} puro. Org provê um
+utilitário para a criação de tabelas em texto-plano, que economiza o
+trabalho de formatar adequadamente suas tabelas, enquanto as mantém
+legíveis, com a ajuda do Emacs. A Tabela [[tab:ord-random]] é um exemplo
+de tabela, portada diretamente do \LaTeX{} para Org.
+
+#+CAPTION: Tempo de ordenação de números aleatórios, para vários métodos, em microssegundos.
+#+NAME: tab:ord-random
+|-----------+--------+--------+----------|
+| Método    | $10^3$ | $10^4$ |   $10^5$ |
+|-----------+--------+--------+----------|
+| Bubble    |   3356 | 142040 | 16238615 |
+| Selection |   5020 | 155210 | 15216051 |
+| Insertion |    256 |  24306 |  1766041 |
+| Merge     |    141 |   1696 |    16984 |
+| Quick     |     61 |    750 |     7598 |
+|-----------+--------+--------+----------|
+
+* Utilizando o /template/ para Org
+
+Este /template/ está sendo primariamente otimizado com as configurações
+para a Universidade Federal dos Vales do Jequitinhonha e Mucuri --
+UFVJM, uma vez que trata-se da instituição onde atualmente sou
+discente. Dito isto, você deverá adaptar este /template/ para a sua
+instituição, baseado no que fiz; por isso, procurei deixá-lo com o
+máximo de clareza possível.
+
+** Dependências
+
+Você vai precisar das seguintes extensões para Emacs:
+
+- Uma distribuição \LaTeX{} de sua preferência. Recomento TeXStudio
+  para Linux, preferencialmente atualizada;
+- =org=, preferencialmente na versão *mais nova*, que pode ser instalada
+  pelo repositório oficial, como indicado no site da ferramenta;
+- =org-ref=, extensão para gerenciamento de bibliografia em Org Mode.
+
+Opcionalmente, você poderá utilizar:
+
+- =AUCTeX=, que provê ferramentas para edição de arquivos TeX no Emacs.
+
+** Estrutura
+
+Este template possui 5 arquivos principais:
+
+- =abntex2.org=
+- =abntex2-meta.org=
+- =abntex2-pretextual.org=
+- =references.bib=
+- =main.org=
+
+O arquivo =abntex2.org= contém a maior parte da especificação de um
+documento válido para \abnTeX{}. Este arquivo sozinho proverá o básico
+para exportar um documento comum segundo as normas da ABNT. Também
+estão inclusas configurações de fontes e uma redefinição para o pacote
+=hyperref= na exportação, substituindo temporariamente a definição
+padrão do Emacs. Edite este arquivo apenas para enquadrá-lo às normas
+de formatação da sua instituição.
+
+O arquivo =abntex2-meta.org= define metadados do documento em
+questão. Título, autor e data do trabalho podem ser definidos
+normalmente através do arquivo Org. Demais dados (orientador, tipo do
+trabalho, instituição, etc.) poderão ser modificados nele.
+
+O arquivo =abntex2-pretextual.org= contém a seção pré-textual do
+trabalho, com definições de capa, folha de rosto, resumos,
+dedicatória, e outros elementos. Você deverá alterá-lo e adicionar ou
+remover as seções que servirem-lhe.
+
+O arquivo =references.bib= é um arquivo BibTeX que enumera referências
+para exemplificar o uso de =org-ref= neste artigo.
+
+A estrutura principal do projeto está em =main.org=. Este arquivo contém
+o texto deste artigo de demonstração, e poderá ser consultado ou
+alterado como necessário.
+
+Para escrever seu trabalho, copie estes arquivos, e modifique-os como
+necessário.
+
+*** Escrevendo o artigo do zero
+
+Também é possível escrever seu arquivo =main.org= do zero. Copie os
+outros arquivos de extensão /.org/ para o mesmo diretório, e então crie
+um arquivo a seu gosto. Você poderá populá-lo, inicialmente, com este
+código:
+
+#+begin_src org
+,#+TITLE:   Título do Seu Trabalho
+,#+AUTHOR:  Seu Nome
+,#+EMAIL:   Seu Email
+,#+DATE:    Data
+
+,#+INCLUDE: abntex2.org            :only-contents t
+,#+INCLUDE: abntex2-meta.org       :only-contents t
+,#+INCLUDE: abntex2-pretextual.org :only-contents t
+#+end_src
+
+Como você pode ver, a melhor forma de utilizar os arquivos do template
+é incluindo seus conteúdos, na íntegra, no seu arquivo, durante o
+tempo de exportação.
+
+Para criar a sua bibliografia, provido que você tenha um arquivo como
+=references.bib= no diretório do projeto, inclua uma seção ao final
+contendo exatamente este texto:
+
+#+begin_src org
+<<bibliography link>>
+bibliography:references.bib
+#+end_src
+
+Não importa o tópico no qual a bibliografia estiver
+inserida. Independente de onde estiver, ela será transformada em sua
+própria seção. É interessante, todavia, que esteja precedida de um
+comando =\postextual=, indicando que escopo textual do trabalho já
+terminou.
+
+** Exportando o trabalho
+
+Você poderá exportar normalmente seu trabalho através do comando =C-c
+C-e l p= no Emacs. Isto criará um arquivo PDF automaticamente. Demais
+configurações poderão ser exploradas no próprio menu de exportação do
+Org Mode. Você só poderá exportar adequadamenteo o projeto se este
+comando for feito no arquivo principal do mesmo.
+
+* Bugs conhecidos
+
+- O preâmbulo incluído em =abntex2.org= pode ser transportado para o seu
+  arquivo Org, porém isso irá desconfigurar a geração de equações, uma
+  vez que o /template/ abusa da opção =#+LATEX_HEADER=. Este pode ser
+  também um efeito indesejado do =AUCTeX=.
+
+* Licenciamento e Uso
+
+Este projeto é redistribuído sob a licença de software BSD de Duas
+Cláusulas (Simplificada). Mais informações sobre a mesma podem ser
+encontradas no arquivo =LICENSE= deste projeto. Reforçando o que a
+licença diz, não sou responsável por quaisquer danos causados por este
+software a nenhuma parte, sendo ele feito primariamente para meu uso
+pessoal, e compartilhado com o mundo em boa-fé e em um espírito de
+camaradagem. Usar este software significa que você está de acordo com
+a licença e com esta nota sobre licenciamento.
+
+
+# Bibliografia
+\postextual
+<<bibliography link>>
+bibliography:references.bib
+
+* Footnotes
+
+[fn:1] Para que a equação seja vista no Emacs, basta repousar o cursor
+sobre o código da equação e usar a sequência de atalhos =C-c C-x
+C-l=. Para assegurar-se de que as visualizações serão geradas ao abrir
+o buffer, adicione a linha =#+STARTUP: latexpreview= ao início do
+arquivo.

@@ -1,0 +1,12 @@
+ltximg/
+*.brf
+*.ilg
+*.ind
+*.lof
+*.lot
+*.bbl
+*.tex
+*.pdf
+fib_quad.png
+*~
+*#*#

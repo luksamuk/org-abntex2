@@ -1,0 +1,44 @@
+#+TITLE:  org-abntex2
+#+AUTHOR: Lucas Vieira
+#+EMAIL:  lucasvieira@protonmail.com
+
+* Introdução
+
+Este é um modelo para escrever artigos sob as normas da ABNT,
+utilizando Org Mode. Trata-se de um /template/, provido para que o
+acadêmico possa simplesmente copiar os arquivos de interesse e
+modificá-los segundo sua necessidade.
+
+O foco primário é garantir compatibilidade com o modelo dos trabalhos
+da Universidade Federal dos Vales do Jequitinhonha e do Mucuri, uma
+vez que sou discente desta instituição. Dito isto, enquanto estiver
+nela, manterei este /template/, uma vez que me serve.
+
+* Motivação
+
+Este projeto tem uma forte motivação pessoal, vinda do meu viés para
+com ferramentas abertas, como Emacs e Org Mode. O formato Org já me
+acompanha há alguns meses, e faço absolutamente tudo com ele. Todavia,
+ainda faltava uma ferramenta que tornasse possível reduzir o
+/boilerplate/ da linguagem TeX para meu proveito acadêmico,
+possibilitando-me criar trabalhos sob as normas da ABNT e das
+convenções da minha universidade. /org-abntex2/ é minha tentativa de
+perseguir esta necessidade, com um /template/ mínimo que pudesse ser
+reusado e readaptado para outras situações.
+
+* Modo de uso
+
+O uso do projeto está exemplificado no arquivo /main.org/ e em sua
+versão em PDF, /main.pdf/, inclusos neste repositório. Uma leitura e
+observação cuidadosa de ambos os arquivos revelará a forma como este
+/template/ funciona.
+
+Caso haja algum problema, você poderá preferencialmente criar uma /issue/
+neste repositório, ou comunicar-se diretamente comigo via e-mail.
+
+* Licenciamento
+
+Este projeto é licenciado sob a licença BSD 2-Clause
+"Simplified". Veja o arquivo /LICENSE/ e os arquivos /main.{org,pdf}/ para
+mais detalhes.
+

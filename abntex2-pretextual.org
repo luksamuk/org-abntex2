@@ -1,0 +1,118 @@
+#   abntex2-pretextual.org
+#   Parte do projeto org-abntex.
+#   Copyright (c) 2019 Lucas Vieira.
+#   Este arquivo é provido sob a licença BSD 2-Clause (simplificada).
+#   Leia o arquivo LICENSE para mais informações.
+
+
+
+#   Elementos pré-textuais   #
+# ATENÇÃO: Altere estes elementos como necessário. Por padrão, serão
+# geradas todas as estruturas do modelo canônico.
+
+# Espaçamento de 1.5 entre linhas
+\OnehalfSpacing
+
+# Sinaliza início dos elementos pré-textuais
+\pretextual
+
+# Capa do trabalho
+\imprimircapa
+
+# Folha de rosto
+\imprimirfolhaderosto
+\newpage
+
+# Ficha catalográfica
+# \fichacatalografica
+# \newpage
+
+# Errata
+#+begin_errata
+\vspace*{\fill}
+\lipsum[1]
+\vspace*{\fill}
+#+end_errata
+\newpage
+
+# Folha de aprovação
+# \folhadeaprovacao
+
+# Dedicatória
+#+begin_dedicatoria
+\vspace*{\fill}
+Esta é uma dedicatória.
+
+\lipsum[1]
+\vspace*{\fill}
+#+end_dedicatoria
+\newpage
+
+# Agradecimentos
+#+begin_agradecimentos
+\vspace*{\fill}
+\lipsum[1]
+\vspace*{\fill}
+#+end_agradecimentos
+\newpage
+
+# Epígrafe
+#+begin_epigrafe
+\vspace*{\fill}
+\lipsum[1]
+\vspace*{\fill}
+#+end_epigrafe
+\newpage
+
+# Resumos
+#+begin_resumo
+Resumo em Português.
+\vspace{\onelineskip}
+
+\noindent
+*Palavras-chave:* latex, abntex, editoração de texto, org, emacs.
+#+end_resumo
+
+#+begin_resumo
+[Abstract]
+Abstract in English.
+\vspace{\onelineskip}
+
+\noindent
+*Keywords:* latex, abntex, text formatting, org, emacs.
+#+end_resumo
+\newpage
+
+# Sumário
+\tableofcontents
+\newpage
+
+
+# Lista de tabelas e de ilustrações
+\listoftables
+\vspace{\onelineskip}
+\listoffigures
+\vspace{\onelineskip}
+
+# Lista de abreviaturas e siglas
+#+begin_siglas
+\item[Teste] Este é um teste.
+\item[LV]   Lucas Vieira.
+#+end_siglas
+\vspace{\onelineskip}
+
+# Lista de simbolos
+#+begin_simbolos
+\item[$\lambda$] Palavra vazia.
+#+end_simbolos
+\vspace{\onelineskip}
+
+
+
+\newpage
+
+
+
+# Muda para os elementos textuais do trabalho. Você pode não querer
+# remover isto.
+\textual
